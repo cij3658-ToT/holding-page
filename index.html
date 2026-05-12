@@ -59,26 +59,41 @@
       <!-- Google Form, ConvertKit, etc.)                                  -->
       <!-- Action attribute below is a placeholder.                        -->
       <!-- ============================================================ -->
-      <form action="https://docs.google.com/forms/d/e/1FAIpQLSfTkMcpahIHHTiaQ05b3wdo1K3fKDrK7R6Me5Texk7v7lqV9g/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;" style="margin:0;">
+     <form action="https://docs.google.com/forms/d/e/1FAIpQLSfTkMcpahIHHTiaQ05b3wdo1K3fKDrK7R6Me5Texk7v7lqV9g/formResponse" method="POST" target="hidden_iframe" onsubmit="handleSubmit(event);" style="margin:0;">
 
-        <div style="margin-bottom:1rem;">
-          <label for="tot-name" style="display:block;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#BFA084;margin-bottom:0.4rem;font-weight:500;">Name</label>
-          <input type="text" id="tot-name" name="entry.1990653287" placeholder="Your name" style="width:100%;padding:0.75rem 1rem;font-size:14px;font-family:inherit;color:#034159;background:#FFFFFF;border:1px solid rgba(3,65,89,0.2);border-radius:6px;box-sizing:border-box;">
-        </div>
-
-        <div style="margin-bottom:1.5rem;">
-          <label for="tot-email" style="display:block;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#BFA084;margin-bottom:0.4rem;font-weight:500;">Email <span style="color:#F2955E;">*</span></label>
-          <input type="email" id="tot-email" name="entry.638382018" placeholder="you@example.com" required style="width:100%;padding:0.75rem 1rem;font-size:14px;font-family:inherit;color:#034159;background:#FFFFFF;border:1px solid rgba(3,65,89,0.2);border-radius:6px;box-sizing:border-box;">
-        </div>
-
-        <button type="submit" style="display:block;width:100%;background:#F2955E;color:#FFFFFF;border:none;border-radius:999px;padding:0.85rem 1.5rem;font-size:13px;font-weight:500;letter-spacing:0.06em;cursor:pointer;font-family:inherit;text-transform:uppercase;">Let me know</button>
-
-      </form>
-
+  <div id="tot-form">
+    <div style="margin-bottom:1rem;">
+      <label for="tot-name" style="display:block;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#BFA084;margin-bottom:0.4rem;font-weight:500;">Name</label>
+      <input type="text" id="tot-name" name="entry.1990653287" placeholder="Your name" style="width:100%;padding:0.75rem 1rem;font-size:14px;font-family:inherit;color:#034159;background:#FFFFFF;border:1px solid rgba(3,65,89,0.2);border-radius:6px;box-sizing:border-box;">
     </div>
 
+    <div style="margin-bottom:1.5rem;">
+      <label for="tot-email" style="display:block;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#BFA084;margin-bottom:0.4rem;font-weight:500;">Email <span style="color:#F2955E;">*</span></label>
+      <input type="email" id="tot-email" name="entry.638382018" placeholder="you@example.com" required style="width:100%;padding:0.75rem 1rem;font-size:14px;font-family:inherit;color:#034159;background:#FFFFFF;border:1px solid rgba(3,65,89,0.2);border-radius:6px;box-sizing:border-box;">
+    </div>
+
+    <button type="submit" id="tot-submit" style="display:block;width:100%;background:#F2955E;color:#FFFFFF;border:none;border-radius:999px;padding:0.85rem 1.5rem;font-size:13px;font-weight:500;letter-spacing:0.06em;cursor:pointer;font-family:inherit;text-transform:uppercase;">Let me know</button>
   </div>
-<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted){}"></iframe>
+
+  <div id="tot-thankyou" style="display:none;text-align:center;padding:1rem 0;">
+    <p style="font-family:Georgia,'Times New Roman',serif;font-size:22px;color:#034159;margin:0 0 0.5rem;">Thank you.</p>
+    <p style="font-size:13px;color:#034159;opacity:0.75;margin:0;">We'll be in touch as soon as the doors are open.</p>
+  </div>
+
+</form>
+
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted){document.getElementById('tot-form').style.display='none';document.getElementById('tot-thankyou').style.display='block';}"></iframe>
+
+<script>
+  var submitted = false;
+  function handleSubmit(e) {
+    var btn = document.getElementById('tot-submit');
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+    btn.style.cursor = 'not-allowed';
+    submitted = true;
+  }
+</script>
 </div>
 
 <style>
